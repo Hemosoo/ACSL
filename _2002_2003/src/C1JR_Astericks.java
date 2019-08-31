@@ -5,7 +5,7 @@ public class C1JR_Astericks {
 	static String s;
 	static int n1, n2;
 	public static void main(String[] args) throws IOException {
-		in = new Scanner(new File("C2JR.in"));
+		in = new Scanner(new File("C1JR.in"));
 		for(int i = 0; i < 9; i++) {
 			try {
 				init();
