@@ -1,11 +1,9 @@
 import java.util.*;
 import java.io.*;
-public class MixingMilk {
+public class mixmilk {
 	static Scanner in;
 	static PrintWriter out;
-	static int[] buckets;
-	static int[] bucketCap;
-	static int[] clone1;
+	static int c1, m1, c2, m2, c3, m3;
 	static int count = 0;
 	public static void main(String[] args) throws IOException {
 		in = new Scanner(new File("mixmilk.in"));
@@ -17,22 +15,50 @@ public class MixingMilk {
 		out.close();
 	}
 	public static void init() {
-		buckets = new int[3];
-		bucketCap = new int[3];
-		clone1 = new int[10];
-		for(int i = 0; i < 3; i++) {
-			bucketCap[i] = in.nextInt();
-			buckets[i] = in.nextInt();
-			clone1[i] = buckets[i];
-		}
-		System.out.println(Arrays.toString(bucketCap));
-		System.out.println(Arrays.toString(buckets));
+		c1 = in.nextInt();
+		m1 = in.nextInt();
+		c2 = in.nextInt();
+		m2 = in.nextInt();
+		c3 = in.nextInt();
+		m3 = in.nextInt();
 	}
 	public static void solve() {
-		buckets = clone1.clone();
-		while(count<100) {
-			for(int i = 0; i < 3; i++) {
-				if(i!=2) {
+		while(count<34) {
+			int space = c2-m2;
+			if(space >= m1) {
+				m2 += m1;
+				m1 = 0;
+			}
+			else {
+				m1 -= space;
+				m2 = c2;
+			}
+			if(count == 33) {
+				break;
+			}
+			space = c3-m3;
+			if(space >= m2) {
+				m3 += m2;
+				m2 = 0;
+			}
+			else {
+				m2 -= space;
+				m3 = c3;
+			}
+			space = c1 - m1;
+			if(space >= m3) {
+				m1 += m3;
+				m3 = 0;
+			}
+			else {
+				m3 -= space;
+				m1 = c1;
+			}
+			count++;
+		}
+		out.print(m1 + "\n" + m2 + "\n" + m3 + "\n");
+	}
+	/*if(i!=2) {
 					buckets[i+1] = buckets[i] + buckets[i+1];
 					if(bucketCap[i+1]<buckets[i+1]) {
 						buckets[i] = buckets[i+1]-bucketCap[i+1];
@@ -45,8 +71,8 @@ public class MixingMilk {
 				else {
 					buckets[0] = buckets[0] + buckets[i];
 					if(bucketCap[0]<buckets[0]) {
-						buckets[i] = buckets[0]-bucketCap[0];
-						buckets[0] = buckets[0]-bucketCap[0];
+						buckets[i] = buckets[i]-bucketCap[0];
+						buckets[0] = bucketCap[0];
 					}
 					else {
 						buckets[i] = 0;
@@ -55,9 +81,5 @@ public class MixingMilk {
 				count++;
 				if(count == 100) {
 					break;
-				}
-			}
-		}
-		out.println(buckets[0] + "\n" + buckets[1] + "\n" + buckets[2] + "\n");
-	}
+				}*/
 }
